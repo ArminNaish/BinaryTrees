@@ -11,7 +11,7 @@ from typing import Union, Optional
 # [2]: DONE
 # [3]: DONE
 # [4]: DONE
-# [5]: TODO
+# [5]: DONE
 # [6]: TODO
 # [7]: TODO
 
@@ -23,6 +23,9 @@ class Node:
 
     def __lt__(self, other):
         return self.value < other.value
+
+    def is_leaf(self):
+        return self.left is None and self.right is None
 
     def from_preorder(values):
         tree = Node(values[0])
@@ -78,17 +81,31 @@ class Node:
                 yield node
 
     def height(self):
-        max = 0
-        def traverse(node, level = 0):
-            nonlocal max
-            if level > max: 
-                max = level
+        max_level = 0
+        def traverse(node, level=0):
+            nonlocal max_level
+            if level > max_level: 
+                max_level = level
             if node.left:
                 traverse(node.left, level+1)
             if node.right:
                 traverse(node.right, level+1)
         traverse(self)
-        return max
+        return max_level
+
+    def max_cost(self):
+        max_cost = 0
+        def traverse(node, cost=0):
+            nonlocal max_cost
+            cost += node.value
+            if cost > max_cost: 
+                max_cost = cost
+            if node.left:
+                traverse(node.left, cost)
+            if node.right:
+                traverse(node.right, cost)
+        traverse(self)
+        return max_cost
 
 
 def preorder(node):
@@ -172,3 +189,6 @@ print (f'input: {values}')
 tree = Node.from_preorder(values)
 pretty_print(tree)
 print(f'height: {tree.height()}')
+print(f'max cost: {tree.max_cost()}')
+
+
