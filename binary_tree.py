@@ -4,10 +4,8 @@ from dataclasses import dataclass
 from typing import Union, Optional
 
 # exercise: https://www.cs.princeton.edu/courses/archive/fall02/cos126/exercises/trees.html
-# todo: add pytest
-# check list of dunder methods
-# todo: keyboard shortkeys
-# tod: add to githbu
+# todo: check list of dunder methods
+# todo: add unit tests
 
 # [1]: DONE
 # [2]: DONE
@@ -78,6 +76,20 @@ class Node:
         for node in traverse(self):
             if node.value > value:
                 yield node
+
+    def height(self):
+        max = 0
+        def traverse(node, level = 0):
+            nonlocal max
+            if level > max: 
+                max = level
+            if node.left:
+                traverse(node.left, level+1)
+            if node.right:
+                traverse(node.right, level+1)
+        traverse(self)
+        return max
+
 
 def preorder(node):
     stack = []
@@ -159,9 +171,4 @@ values = [5, 2, 19, -4, 3, 9, 21, 19, 25]
 print (f'input: {values}')
 tree = Node.from_preorder(values)
 pretty_print(tree)
-
-keys = [node.value for node in tree.nodes_less_than(21, preorder)]
-print(keys)
-
-keys = [node.value for node in tree.nodes_greater_than(19, preorder)]
-print(keys)
+print(f'height: {tree.height()}')
