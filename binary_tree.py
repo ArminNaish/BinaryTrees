@@ -3,9 +3,8 @@ from queue import Queue
 from dataclasses import dataclass
 from typing import Union, Optional
 
-# exercise: https://www.cs.princeton.edu/courses/archive/fall02/cos126/exercises/trees.html
+# https://www.cs.princeton.edu/courses/archive/fall02/cos126/exercises/trees.html
 # todo: check list of dunder methods
-# todo: add unit tests
 
 # [1]: DONE
 # [2]: DONE
@@ -80,9 +79,9 @@ class Node:
             if node.value > value:
                 yield node
 
-    def height(self):
-        max_level = 0
-        def traverse(node, level=0):
+    def depth(self):
+        max_level = 1
+        def traverse(node, level=1):
             nonlocal max_level
             if level > max_level: 
                 max_level = level
@@ -150,45 +149,4 @@ def pretty_print(node, indent=0):
         pretty_print(node.left,indent+2)
     if node.right:
         pretty_print(node.right, indent+2)
-
-
-
-#values = ['D','B','A','C','F','E','G']
-#print(f'input: {values}')
-#tree = Node.from_preorder(values)
-#pretty_print(tree)
-#print(f'preorder: {tree.sequence(preorder)}')
-#print(f'levelorder: {tree.sequence(levelorder)}')
-#print(f'inorder: {tree.sequence(inorder)}')
-#print(f'postorder: {tree.sequence(postorder)}')
-#print(f'count: {tree.count(preorder)}')
-
-#values = ['C','B','A','D','E']
-#print(f'input: {values}')
-#tree = Node.from_preorder(values)
-#pretty_print(tree)
-#print(f'preorder: {tree.sequence(preorder)}')
-#print(f'levelorder: {tree.sequence(levelorder)}')
-#print(f'inorder: {tree.sequence(inorder)}')
-#print(f'postorder: {tree.sequence(postorder)}')
-#print(f'count: {tree.count(preorder)}')
-
-#values = ['E','C','B','A','D', 'H', 'F', 'G', 'I']
-#print(f'input: {values}')
-#tree = Node.from_preorder(values)
-#pretty_print(tree)
-#print(f'preorder: {tree.sequence(preorder)}')
-#print(f'levelorder: {tree.sequence(levelorder)}')
-#print(f'inorder: {tree.sequence(inorder)}')
-#print(f'postorder: {tree.sequence(postorder)}')
-#print(f'count: {tree.count(preorder)}')
-
-
-values = [5, 2, 19, -4, 3, 9, 21, 19, 25]
-print (f'input: {values}')
-tree = Node.from_preorder(values)
-pretty_print(tree)
-print(f'height: {tree.height()}')
-print(f'max cost: {tree.max_cost()}')
-
 
