@@ -44,3 +44,13 @@ def test_max_cost():
     tree = Node.from_preorder([4,1,3,7,5,6])
     actual = tree.max_cost()
     assert actual == 22
+
+def test_is_balanced_1():
+    tree = Node.from_preorder([4,1,3,7,5,6])
+    actual = tree.is_balanced()
+    assert actual == True
+
+def test_is_balanced_2():
+    tree = Node.from_preorder([4,1,3,7,5,6,8,9])
+    actual = tree.is_balanced()
+    assert actual == False

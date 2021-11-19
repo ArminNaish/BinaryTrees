@@ -4,15 +4,6 @@ from dataclasses import dataclass
 from typing import Union, Optional
 
 # https://www.cs.princeton.edu/courses/archive/fall02/cos126/exercises/trees.html
-# todo: check list of dunder methods
-
-# [1]: DONE
-# [2]: DONE
-# [3]: DONE
-# [4]: DONE
-# [5]: DONE
-# [6]: TODO
-# [7]: TODO
 
 @dataclass()
 class Node:
@@ -25,6 +16,11 @@ class Node:
 
     def is_leaf(self):
         return self.left is None and self.right is None
+
+    def is_balanced(self):
+        if self.left is None or self.right is None:
+            return False
+        return abs(self.left.count(preorder) - self.right.count(preorder)) <= 1
 
     def from_preorder(values):
         tree = Node(values[0])
